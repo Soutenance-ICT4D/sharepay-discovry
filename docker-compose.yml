@@ -1,0 +1,12 @@
+services:
+  sharepay-discovery:
+    build: .
+    container_name: sharepay-discovery
+    ports:
+      - "8761:8761"
+    volumes:
+      - ./.env:/app/.env:ro
+    environment:
+      EUREKA_HOSTNAME: "${EUREKA_HOSTNAME}"
+      JAVA_OPTS: "-Xms128m -Xmx256m"
+    restart: unless-stopped
