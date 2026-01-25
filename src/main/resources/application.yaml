@@ -3,13 +3,14 @@ server:
 
 eureka:
   instance:
-    hostname: localhost
+    # Permet aux autres services de trouver Eureka via son nom d'hôte DNS en prod
+    hostname: ${EUREKA_HOSTNAME:localhost}
   client:
     register-with-eureka: false
     fetch-registry: false
     service-url:
       defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
   server:
-    enable-self-preservation: true
+    # Indispensable en dev pour que les instances décochées disparaissent vite
+    enable-self-preservation: false 
     eviction-interval-timer-in-ms: 5000
-    wait-time-in-ms-when-sync-empty: 0
